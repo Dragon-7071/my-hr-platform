@@ -8,11 +8,11 @@ const LoginPage = lazy(() => import('../../pages/LoginPage'));
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <HomePage />, // TODO: Замінити на MainLayout
+        element: <HomePage />,
     },
     {
         path: '/login',
-        element: <LoginPage />, // TODO: Замінити на AuthLayout
+        element: <LoginPage />,
     },
 ]);
 
