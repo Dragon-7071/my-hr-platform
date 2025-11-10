@@ -55,7 +55,7 @@ const AuthStateListener = () => {
 
 function App() {
     return (
-        // Provider з Redux має бути ЗОВНІ
+
         <Provider store={store}>
             <QueryClientProvider client={queryClient}>
                 <GlobalStyles />

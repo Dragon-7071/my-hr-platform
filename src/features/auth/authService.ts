@@ -5,7 +5,7 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../../shared/api/firebase';
-import type { IRegisterData, ILoginData } from './authTypes'; // Ми створимо цей файл зараз
+import type { IRegisterData, ILoginData } from './authTypes';
 
 /**
  * Реєструє нового користувача

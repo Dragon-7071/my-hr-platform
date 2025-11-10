@@ -17,7 +17,7 @@ const firebaseConfig = {
 // Ініціалізація
 const app = initializeApp(firebaseConfig);
 
-// Експортуємо сервіси, які будемо використовувати
+// Експортуємо сервіси, які будуть використовуватись
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);

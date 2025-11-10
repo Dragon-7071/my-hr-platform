@@ -1,23 +1,44 @@
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '../app/store';
+import type {RootState} from '../app/store';
 import { logoutUser } from '../features/auth/authService';
 import { clearUser } from '../app/store/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '../shared/ui/Button';
 import styled from 'styled-components';
+
+// Компонент для Рекрутера
+const RecruiterDashboard = () => (
+    <>
+        <h1>Панель Рекрутера</h1>
+        <p>Тут ви можете створювати вакансії та керувати кандидатами.</p>
+        <Button as={Link} to="/create-job" style={{ textDecoration: 'none' }}>
+            Створити нову вакансію
+        </Button>
+    </>
+);
+
+// Компонент для Кандидата
+const CandidateDashboard = () => (
+    <>
+        <h1>Панель Кандидата</h1>
+        <p>Шукайте вакансії мрії та відстежуйте свої заявки.</p>
+        <Button as={Link} to="/search-jobs" style={{ textDecoration: 'none' }}>
+            Пошук вакансій
+        </Button>
+    </>
+);
 
 const HomePage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // Отримуємо дані користувача з Redux
     const user = useSelector((state: RootState) => state.user.user);
     const authStatus = useSelector((state: RootState) => state.user.status);
 
     const handleLogout = async () => {
         await logoutUser();
-        dispatch(clearUser()); // Очищуємо Redux
-        navigate('/login'); // Перекидаємо на логін
+        dispatch(clearUser());
+        navigate('/login');
     };
 
     if (authStatus === 'loading') {
@@ -28,24 +49,27 @@ const HomePage = () => {
         <PageContainer>
             {user ? (
                 <>
-                    <h1>Вітаємо, {user.email}!</h1>
-                    <UserInfo>Ваш ID: {user.uid}</UserInfo>
-                    <UserInfo>Ваша роль: <strong>{user.role}</strong></UserInfo>
+                    {/* Привітання та вибір панелі за роллю */}
+                    <WelcomeHeader>Вітаємо, {user.email}!</WelcomeHeader>
+
+                    {user.role === 'recruiter' && <RecruiterDashboard />}
+                    {user.role === 'candidate' && <CandidateDashboard />}
+
                     <LogoutButton onClick={handleLogout}>Вийти</LogoutButton>
                 </>
             ) : (
                 <>
                     <h1>Ви не увійшли в систему</h1>
-                    <a href="/login">Перейти на сторінку входу</a>
+                    <Link to="/login">Перейти на сторінку входу</Link>
                 </>
             )}
         </PageContainer>
     );
-    };
+};
 
-    export default HomePage;
+export default HomePage;
 
-    const PageContainer = styled.div`
+const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,14 +77,19 @@ const HomePage = () => {
     min-height: 100vh;
     padding: 24px;
     text-align: center;
-    `;
+`;
 
-    const UserInfo = styled.p`
-    font-size: 18px;
-    color: #333;
-    `;
+const WelcomeHeader = styled.h2`
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 32px;
+`;
 
-    const LogoutButton = styled(Button)`
+const LogoutButton = styled(Button)`
     margin-top: 24px;
     max-width: 200px;
-    `;
+    background-color: #6c757d; // Інший колір для кнопки виходу
+    &:hover {
+        background-color: #5a6268;
+    }
+`;

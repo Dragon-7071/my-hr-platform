@@ -23,7 +23,7 @@ export const LoginForm = () => {
         setError(null);
         try {
             await loginUser(data);
-            // Успішний вхід. Слухач в App.tsx все підхопить.
+
             navigate('/home');
         } catch (e: any) {
             // Обробка помилок Firebase
@@ -62,10 +62,7 @@ export const LoginForm = () => {
     );
 };
 
-// ... (стилі ті ж самі, що й у RegisterForm)
-
 const FormContainer = styled.form`
-  /* ... (твій старий код) */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -77,7 +74,6 @@ const FormContainer = styled.form`
 `;
 
 const ErrorMsg = styled.p`
-  /* ... (твій старий код) */
   color: red;
   font-size: 14px;
   margin-top: -10px;
@@ -85,7 +81,6 @@ const ErrorMsg = styled.p`
 `;
 
 const GlobalErrorMsg = styled(ErrorMsg)`
-  /* ... (твій старий код) */
   margin-top: 0;
   text-align: center;
   background: #fff0f0;

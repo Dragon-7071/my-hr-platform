@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './userSlice'; // 1. Переконайся, що цей імпорт є
+import userReducer from './userSlice';
 
 const rootReducer = {
-    user: userReducer, // 2. Переконайся, що 'user' тут додано
+    user: userReducer,
 };
 
 export const store = configureStore({

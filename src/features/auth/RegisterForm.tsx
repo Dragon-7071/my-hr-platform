@@ -73,10 +73,8 @@ export const RegisterForm = () => {
     );
 };
 
-// ... (старі стилі залишаються, додаємо GlobalErrorMsg)
 
 const FormContainer = styled.form`
-  /* ... (твій старий код) */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -88,7 +86,6 @@ const FormContainer = styled.form`
 `;
 
 const ErrorMsg = styled.p`
-  /* ... (твій старий код) */
   color: red;
   font-size: 14px;
   margin-top: -10px;
@@ -96,7 +93,6 @@ const ErrorMsg = styled.p`
 `;
 
 const GlobalErrorMsg = styled(ErrorMsg)`
-  /* Стиль для загальної помилки форми */
   margin-top: 0;
   text-align: center;
   background: #fff0f0;
@@ -106,7 +102,6 @@ const GlobalErrorMsg = styled(ErrorMsg)`
 `;
 
 const Select = styled.select`
-  /* ... (твій старий код) */
   width: 100%;
   padding: 12px 16px;
   margin-bottom: 16px;

@@ -1,29 +1,69 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
+import { ProtectedRoute } from './ProtectedRoute'; // Імпортуємо наш захист
 
-// Використовуємо lazy loading
+
 const HomePage = lazy(() => import('../../pages/HomePage'));
 const LoginPage = lazy(() => import('../../pages/LoginPage'));
-const RegisterPage = lazy(() => import('../../pages/RegisterPage')); // Додано
+const RegisterPage = lazy(() => import('../../pages/RegisterPage'));
+
+const CreateJobPage = lazy(() => import('../../pages/CreateJobPage'));
+const JobSearchPage = lazy(() => import('../../pages/JobSearchPage'));
+const JobDetailsPage = lazy(() => import('../../pages/JobDetailsPage'));
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        // Поки що головна - це просто редірект на логін
-        element: <Navigate to="/login" replace />,
-    },
+    // Публічні роути
     {
         path: '/login',
         element: <LoginPage />,
     },
     {
-        path: '/register', // Додано
+        path: '/register',
         element: <RegisterPage />,
     },
+
+    // Роути, які вимагають входу (будь-яка роль)
     {
-        path: '/home', // Створимо тимчасову "домашню" сторінку
-        element: <HomePage />,
-    }
+        element: <ProtectedRoute allowedRoles={['candidate', 'recruiter']} />,
+        children: [
+            {
+                path: '/home',
+                element: <HomePage />,
+            },
+            {
+                path: '/job/:jobId', // :jobId - це динамічний параметр
+                element: <JobDetailsPage />,
+            }
+        ],
+    },
+
+    // Роути ТІЛЬКИ ДЛЯ РЕКРУТЕРІВ
+    {
+        element: <ProtectedRoute allowedRoles={['recruiter']} />,
+        children: [
+            {
+                path: '/create-job',
+                element: <CreateJobPage />,
+            },
+        ],
+    },
+
+    // Роути тільки для кандидатів
+    {
+        element: <ProtectedRoute allowedRoles={['candidate']} />,
+        children: [
+            {
+                path: '/search-jobs',
+                element: <JobSearchPage />,
+            },
+        ],
+    },
+
+    // Редірект з головної
+    {
+        path: '/',
+        element: <Navigate to="/home" replace />,
+    },
 ]);
 
 export const AppRouter = () => {
