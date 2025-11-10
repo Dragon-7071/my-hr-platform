@@ -1,17 +1,17 @@
-import { LoginForm } from '../features/auth/LoginForm';
+import { RegisterForm } from '../features/auth/RegisterForm';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
+const RegisterPage = () => {
     return (
         <PageContainer>
-            <LoginForm />
-            <StyledLink to="/register">Немає акаунта? Зареєструватися</StyledLink>
+            <RegisterForm />
+            <StyledLink to="/login">Вже маєте акаунт? Увійти</StyledLink>
         </PageContainer>
     );
 };
 
-export default LoginPage;
+export default RegisterPage;
 
 const PageContainer = styled.div`
   display: flex;
