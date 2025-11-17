@@ -10,6 +10,9 @@ const RegisterPage = lazy(() => import('../../pages/RegisterPage'));
 const CreateJobPage = lazy(() => import('../../pages/CreateJobPage'));
 const JobSearchPage = lazy(() => import('../../pages/JobSearchPage'));
 const JobDetailsPage = lazy(() => import('../../pages/JobDetailsPage'));
+const JobApplicationsPage = lazy(() => import('../../pages/JobApplicationsPage'));
+const AnalyticsPage = lazy(() => import('../../pages/AnalyticsPage'));
+const MyApplicationsPage = lazy(() => import('../../pages/MyApplicationsPage'));
 
 const router = createBrowserRouter([
     // Публічні роути
@@ -45,6 +48,14 @@ const router = createBrowserRouter([
                 path: '/create-job',
                 element: <CreateJobPage />,
             },
+            {
+                path: '/job/:jobId/applications',
+                element: <JobApplicationsPage />,
+            },
+            {
+                path: '/analytics',
+                element: <AnalyticsPage />,
+            },
         ],
     },
 
@@ -55,6 +66,10 @@ const router = createBrowserRouter([
             {
                 path: '/search-jobs',
                 element: <JobSearchPage />,
+            },
+            {
+                path: '/my-applications',
+                element: <MyApplicationsPage />,
             },
         ],
     },

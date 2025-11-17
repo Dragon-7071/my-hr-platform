@@ -61,3 +61,20 @@ export const getJobById = async (jobId: string): Promise<IJobDocument | null> =>
         return null;
     }
 };
+
+/**
+ * Отримує всі вакансії, створені конкретним рекрутером
+ */
+export const getJobsByRecruiter = async (recruiterId: string): Promise<IJobDocument[]> => {
+    const jobsCollectionRef = collection(db, 'jobs');
+    // Запит: знайти всі вакансії, де recruiterId == id поточного користувача
+    const q = query(jobsCollectionRef, where('recruiterId', '==', recruiterId));
+
+    const querySnapshot = await getDocs(q);
+    const jobs: IJobDocument[] = [];
+    querySnapshot.forEach((doc) => {
+        jobs.push({ id: doc.id, ...doc.data() } as IJobDocument);
+    });
+
+    return jobs;
+};

@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-// Тип для даних користувача, які ми зберігаємо
-interface UserData {
+export interface UserData {
     uid: string;
     email: string | null;
     role: 'recruiter' | 'candidate' | null; // Наша кастомна логіка
@@ -15,7 +14,8 @@ interface UserState {
 
 const initialState: UserState = {
     user: null,
-    status: 'idle',
+    // Ми починаємо в стані 'loading', щоб ProtectedRoute чекав
+    status: 'loading',
 };
 
 const userSlice = createSlice({
@@ -25,7 +25,7 @@ const userSlice = createSlice({
         // Редьюсер для встановлення користувача (при логіні)
         setUser: (state, action: PayloadAction<UserData | null>) => {
             state.user = action.payload;
-            state.status = 'idle';
+            state.status = 'idle'; // Тепер статус 'idle', бо завантаження завершено
         },
         // Редьюсер для статусу завантаження
         setAuthLoading: (state) => {
@@ -34,6 +34,7 @@ const userSlice = createSlice({
         // Редьюсер для скидання користувача (при логауті)
         clearUser: (state) => {
             state.user = null;
+            state.status = 'idle'; // Завантаження не потрібне
         },
     },
 });
