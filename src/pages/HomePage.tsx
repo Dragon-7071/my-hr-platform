@@ -171,7 +171,7 @@ const RecruiterContainer = styled.div`
 
 
 const JobListContainer = styled.div`
-  margin-top: 24px; // Цей відступ відсуне список від кнопки
+  margin-top: 24px; 
 `;
 
 const JobCard = styled(Link)`

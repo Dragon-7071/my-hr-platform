@@ -19,7 +19,7 @@ export interface IScreeningQuestion {
     correctAnswer: 'yes' | 'no';
 }
 
-// Це тип даних, які ми збираємо з форми
+// Це тип даних, які збираємо з форми
 export interface IJobData {
     title: string;
     description: string;

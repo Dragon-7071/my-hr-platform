@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactDatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Імпорт стилів
+import 'react-datepicker/dist/react-datepicker.css';
 import { Button } from '../../shared/ui/Button';
 import { Input } from '../../shared/ui/Input';
 import { scheduleInterview } from './applicationService';
@@ -28,7 +28,7 @@ const ModalContent = styled.div`
 `;
 const DatePickerWrapper = styled.div`
   margin-bottom: 16px;
-  // Стилі, щоб ReactDatePicker виглядав як наш Input
+  // Стилі, щоб ReactDatePicker виглядав як Input
   .react-datepicker-wrapper {
     width: 100%;
   }

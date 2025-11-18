@@ -18,7 +18,7 @@ export const RegisterForm = () => {
         formState: { errors },
     } = useForm<IRegisterData>(); // Вказуємо тип для useForm
 
-    // Наша функція, яка викликається при сабміті
+    // Функція, яка викликається при сабміті
     const handleRegister = async (data: IRegisterData) => {
         setIsLoading(true);
         setError(null);

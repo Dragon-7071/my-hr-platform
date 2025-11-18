@@ -3,7 +3,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 export interface UserData {
     uid: string;
     email: string | null;
-    role: 'recruiter' | 'candidate' | null; // Наша кастомна логіка
+    role: 'recruiter' | 'candidate' | null; // Кастомна логіка
 }
 
 // Тип для стану зрізу
@@ -14,7 +14,7 @@ interface UserState {
 
 const initialState: UserState = {
     user: null,
-    // Ми починаємо в стані 'loading', щоб ProtectedRoute чекав
+    // Починаємо в стані 'loading', щоб ProtectedRoute чекав
     status: 'loading',
 };
 
@@ -22,16 +22,16 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        // Редьюсер для встановлення користувача (при логіні)
+        // Ред'юсер для встановлення користувача (при логіні)
         setUser: (state, action: PayloadAction<UserData | null>) => {
             state.user = action.payload;
             state.status = 'idle'; // Тепер статус 'idle', бо завантаження завершено
         },
-        // Редьюсер для статусу завантаження
+        // Ред'юсер для статусу завантаження
         setAuthLoading: (state) => {
             state.status = 'loading';
         },
-        // Редьюсер для скидання користувача (при логауті)
+        // Ред'юсер для скидання користувача (при логауті)
         clearUser: (state) => {
             state.user = null;
             state.status = 'idle'; // Завантаження не потрібне

@@ -83,7 +83,7 @@ export const CandidateCard = ({ application, isOverlay = false }: CandidateCardP
         url: application.interviewUrl,
     });
 
-    // --- 1. Використовуємо useDraggable ---
+    // Використовуємо useDraggable
     const {
         attributes,
         listeners,
@@ -101,14 +101,14 @@ export const CandidateCard = ({ application, isOverlay = false }: CandidateCardP
     return (
         <>
             <CardContainer
-                // 3. 'setNodeRef' вішаємо на контейнер
+                // 'setNodeRef' вішаємо на контейнер
                 ref={setNodeRef}
-                // 4. 'isDragging' передаємо для стилізації (приховування)
+                // 'isDragging' передаємо для стилізації (приховування)
                 $isDragging={isDragging && !isOverlay}
                 // Додаємо 'style' тільки для оверлея
                 style={isOverlay ? { cursor: 'grabbing' } : {}}
             >
-                {/* 5. 'listeners' і 'attributes' вішаємо на заголовок */}
+                {/* 'listeners' і 'attributes' вішаємо на заголовок */}
                     <CardHeader {...listeners} {...attributes}>
                     {application.candidateEmail}
                     </CardHeader>

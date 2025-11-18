@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
-import { ProtectedRoute } from './ProtectedRoute'; // Імпортуємо наш захист
+import { ProtectedRoute } from './ProtectedRoute'; // Імпортуємо захист
 
 
 const HomePage = lazy(() => import('../../pages/HomePage'));

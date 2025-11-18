@@ -6,7 +6,7 @@ import { getApplicationsForCandidate } from '../features/applications/applicatio
 import type { IApplicationDocument } from '../features/applications/applicationTypes';
 import { Link } from 'react-router-dom';
 import { Timestamp } from 'firebase/firestore';
-import { getStatusLabel } from '../shared/utils/formatStatus'; // <-- 1. ІМПОРТ
+import { getStatusLabel } from '../shared/utils/formatStatus';
 
 const PageContainer = styled.div`
     width: 100%;
@@ -67,7 +67,6 @@ const formatInterviewTime = (time: Timestamp | Date): string => {
     });
 };
 
-// --- (Ми видалили звідси getStatusLabel, бо імпортували її) ---
 
 const MyApplicationsPage = () => {
     const user = useSelector((state: RootState) => state.user.user);
@@ -102,7 +101,7 @@ const MyApplicationsPage = () => {
             ) : (
                 <div>
                     {applications.map((app) => {
-                        // --- 2. ВИКОРИСТОВУЄМО ФУНКЦІЮ ---
+                        //ВИКОРИСТОВУЄМО ФУНКЦІЮ
                         const status = getStatusLabel(app.status);
                         return (
                             <AppCard key={app.id} color={status.color}>

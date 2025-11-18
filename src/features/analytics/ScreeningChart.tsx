@@ -10,12 +10,12 @@ interface ScreeningChartProps {
 
 export const ScreeningChart = ({ applications }: ScreeningChartProps) => {
 
-    // 1. Рахуємо тих, хто "не пройшов" (це ТІЛЬКИ ті, у кого були питання, але 0 балів)
+    // 1. Рахуємо тих, хто "не пройшов" (це тільки ті, у кого були питання, але 0 балів)
     const failed = applications.filter(
         (app) => app.maxScore > 0 && app.score === 0
     ).length;
 
-    // 2. Рахуємо тих, хто "пройшов" (це ті, хто набрав >0 балів, АБО ті, у кого питань не було)
+    // 2. Рахуємо тих, хто "пройшов" (це ті, хто набрав >0 балів, або ті, у кого питань не було)
     const passed = applications.filter(
         (app) => app.score > 0 || app.maxScore === 0
     ).length;
@@ -48,7 +48,7 @@ export const ScreeningChart = ({ applications }: ScreeningChartProps) => {
             },
             title: {
                 display: true,
-                // Оновлюємо заголовок, бо він тепер враховує ВСІ заявки
+                // Оновлюємо заголовок, бо він тепер враховує всі заявки
                 text: 'Результати автоматичного скринінгу',
             },
         },

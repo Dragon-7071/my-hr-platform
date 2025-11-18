@@ -1,5 +1,5 @@
 export interface IApplicationData {
-    resume: FileList; // Тип для <input type="file">
+    resume: FileList;
     // Об'єкт, де ключ - це ID питання, а значення - відповідь 'yes' або 'no'
     answers: {
         [questionId: string]: 'yes' | 'no';

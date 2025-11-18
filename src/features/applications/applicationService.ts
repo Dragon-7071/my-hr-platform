@@ -25,7 +25,7 @@ export const submitApplication = async (
 
     // 2. Розраховуємо бал "Automated Screening"
     let score = 0;
-    let maxScore = job.screeningQuestions.length;
+    const maxScore = job.screeningQuestions.length;
     const answers = job.screeningQuestions.map((q) => {
         // Знаходимо відповідь кандидата на це питання
         const candidateAnswer = formData.answers[q.id];

@@ -56,7 +56,7 @@ export const CreateJobForm = () => {
         },
     });
 
-    // Це react-hook-form для динамічних полів
+    // react-hook-form для динамічних полів
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'screeningQuestions',

@@ -1,20 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {
-    DndContext,
-    type DragEndEvent,
-    type DragStartEvent, // <-- 1. Новий імпорт
-    DragOverlay,  // <-- 2. Новий імпорт
-    PointerSensor,
-    useSensor,
-    useSensors,
-    useDroppable, // <-- 3. Новий імпорт
-} from '@dnd-kit/core';
-// 'SortableContext' та 'strategy' більше НЕ потрібні
-import {
-    getApplicationsForJob,
-    updateApplicationStatus,
-} from './applicationService';
+import {DndContext, type DragEndEvent, type DragStartEvent, DragOverlay, PointerSensor, useSensor, useSensors, useDroppable, } from '@dnd-kit/core';
+import {getApplicationsForJob, updateApplicationStatus, } from './applicationService';
 import type { IApplicationDocument } from './applicationTypes';
 import { CandidateCard } from './CandidateCard';
 
@@ -65,7 +52,6 @@ interface KanbanColumnProps {
 }
 
 const KanbanColumn = ({ id, title, items }: KanbanColumnProps) => {
-    // Кожна колонка тепер є 'Droppable'
     const { setNodeRef, isOver } = useDroppable({ id });
 
     return (
@@ -91,7 +77,7 @@ export const CandidateKanban = ({ jobId }: CandidateKanbanProps) => {
     });
     const [isLoading, setIsLoading] = useState(true);
 
-    // 7. Стан для 'DragOverlay' (щоб фіксити баг зі скролом)
+    // 7. Стан для 'DragOverlay'
     const [activeItem, setActiveItem] = useState<IApplicationDocument | null>(null);
 
     const sensors = useSensors(
@@ -100,7 +86,7 @@ export const CandidateKanban = ({ jobId }: CandidateKanbanProps) => {
         })
     );
 
-    // Завантаження даних (залишається без змін)
+    // Завантаження даних
     useEffect(() => {
         const fetchApplications = async () => {
             try {
@@ -130,7 +116,7 @@ export const CandidateKanban = ({ jobId }: CandidateKanbanProps) => {
         setActiveItem(event.active.data.current as IApplicationDocument);
     };
 
-    // 9. Спрощена логіка 'onDragEnd' (вона виправить баг "повернення")
+    // 9. Спрощена логіка 'onDragEnd'
     const handleDragEnd = (event: DragEndEvent) => {
         setActiveItem(null); // Завжди очищуємо оверлей
         const { active, over } = event;
@@ -148,7 +134,7 @@ export const CandidateKanban = ({ jobId }: CandidateKanbanProps) => {
         );
 
         if (!oldStatus || oldStatus === newStatus) {
-            return; // Нічого не змінилося
+            return;
         }
 
         // Оновлюємо стан локально
@@ -177,7 +163,6 @@ export const CandidateKanban = ({ jobId }: CandidateKanbanProps) => {
             sensors={sensors}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
-            // Ми більше не використовуємо 'closestCenter'
         >
             <BoardContainer>
                 {(
@@ -186,7 +171,7 @@ export const CandidateKanban = ({ jobId }: CandidateKanbanProps) => {
                         typeof KANBAN_COLUMNS[ColumnId],
                     ][]
                 ).map(([colId, column]) => (
-                    // 10. Рендеримо новий компонент 'KanbanColumn'
+                    // 10. Рендеримо компонент 'KanbanColumn'
                     <KanbanColumn
                         key={colId}
                         id={colId}
@@ -196,7 +181,7 @@ export const CandidateKanban = ({ jobId }: CandidateKanbanProps) => {
                 ))}
             </BoardContainer>
 
-            {/* 11. DragOverlay фіксить баг зі скролом */}
+            {/* 11. DragOverlay */}
             <DragOverlay>
                 {activeItem ? (
                     <CandidateCard application={activeItem} isOverlay />

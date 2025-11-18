@@ -33,7 +33,7 @@ const AuthStateListener = () => {
                         role: userData.role || null, // Отримуємо роль
                     }));
                 } else {
-                    // Якщо раптом документа немає (буває при помилках реєстрації)
+                    // Якщо раптом документа немає
                     dispatch(setUser({
                         uid: user.uid,
                         email: user.email,
