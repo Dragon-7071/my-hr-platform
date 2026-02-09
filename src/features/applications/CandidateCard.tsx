@@ -5,7 +5,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { ScheduleInterviewModal } from './ScheduleInterviewModal';
 import { Timestamp } from 'firebase/firestore';
 
-// --- Змінюємо стилі, щоб приховувати оригінал під час перетягування ---
+// Змінюємо стилі, щоб приховувати оригінал під час перетягування
 const CardContainer = styled.div<{ $isDragging: boolean }>`
     background: white;
     padding: 16px;
